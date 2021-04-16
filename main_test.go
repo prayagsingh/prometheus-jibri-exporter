@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -13,7 +14,10 @@ type constHandler struct {
 }
 
 func (h constHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(h.s))
+	_, err := w.Write([]byte(h.s))
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func TestGetMetrics(t *testing.T) {
