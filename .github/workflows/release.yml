@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - '*'
+    paths:
+    - "*"
+    - "!README.md"
 
 jobs:
   release:
