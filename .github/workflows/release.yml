@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - '*'
+    paths:
+    - "*"
+    - "!README.md"
 
 jobs:
   release:
@@ -69,3 +72,12 @@ jobs:
           asset_path: build/sha512sums.txt
           asset_name: sha512sums.txt
           asset_content_type: application/octet-stream
+      - name: Build and push images
+        uses: docker/build-push-action@v1
+        env:
+          DOCKER_BUILDKIT: "1"
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: prayagsingh/prometheus-jibri-exporter
+          tags: latest, ${{ github.ref }}

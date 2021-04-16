@@ -1,6 +1,6 @@
 # Jibri Metrics Exporter
 
-[![Release](https://github.com/prayagsingh/prometheus-jibri-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/prayagsingh/prometheus-jibri-exporter/actions/workflows/release.yml)
+[![Release](https://img.shields.io/github/v/release/prayagsingh/prometheus-jibri-exporter?color=dark-green)](https://github.com/prayagsingh/prometheus-jibri-exporter/releases/)
 [![Integration](https://github.com/prayagsingh/prometheus-jibri-exporter/workflows/Integration/badge.svg?branch=main)](https://github.com/prayagsingh/prometheus-jibri-exporter/workflows/Integration/badge.svg?branch=main) [![Quality](https://github.com/prayagsingh/prometheus-jibri-exporter/workflows/Quality/badge.svg?branch=main)](https://github.com/prayagsingh/prometheus-jibri-exporter/workflows/Quality/badge.svg?branch=main) [![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/prayagsingh/prometheus-jibri-exporter)](https://hub.docker.com/r/prayagsingh/prometheus-jibri-exporter) [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/prayagsingh/prometheus-jibri-exporter)](https://hub.docker.com/r/prayagsingh/prometheus-jibri-exporter)
 
 Prometheus Exporter for Jibri written in Go. Special thanks to `Systemli` team since this project is based on [Prometheus-jitsi-meet-exporter](https://github.com/systemli/prometheus-jitsi-meet-exporter) repository.
