@@ -3,7 +3,7 @@ name: Build and push images
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "*"
       - "!README.md"
@@ -11,7 +11,7 @@ on:
       - 'v*.*.*'
   pull_request:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   docker:
