@@ -23,6 +23,17 @@ type jibriStats struct {
 	} `json:"status"`
 }
 
+// this is a workaround since prometheus is unable to parse IDLE. it is showing error in targets
+// error: strconv.ParseFloat: parsing "IDLE": invalid syntax.
+type newjibriStats struct {
+	Status struct {
+		BusyStatus int `json:"busyStatus"`
+		Health     struct {
+			HealthStatus int `json:"healthStatus"`
+		} `json:"health"`
+	} `json:"status"`
+}
+
 var tpl = template.Must(template.New("stats").Parse(`# HELP jibri_busystatus It check the status of the jibri whether BUSY, IDLE.
 # TYPE jibri_busystatus gauge
 jibri_busystatus {{.Status.BusyStatus}}
@@ -44,13 +55,31 @@ func (h handler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	defer resp.Body.Close()
 
 	var stats jibriStats
+	var newstats newjibriStats
+
 	if err := json.NewDecoder(resp.Body).Decode(&stats); err != nil {
 		log.Printf("json decoding error: %v", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	// Replacing IDLE with 0, BUSY with 1 and EXPIRED with 2
+	// HEALTHY 1 and UNHEALTHY 0
+	if stats.Status.BusyStatus == "IDLE" {
+		newstats.Status.BusyStatus = 0
+	} else if stats.Status.BusyStatus == "BUSY" {
+		newstats.Status.BusyStatus = 1
+	} else if stats.Status.BusyStatus == "EXPIRED" {
+		newstats.Status.BusyStatus = 2
+	}
+	if stats.Status.Health.HealthStatus == "HEALTHY" {
+		newstats.Status.Health.HealthStatus = 1
+	} else if stats.Status.Health.HealthStatus == "UNHEALTHY" {
+		newstats.Status.Health.HealthStatus = 0
+	}
+
 	w.Header().Set("Content-Type", "text/plain")
-	_ = tpl.Execute(w, &stats)
+	_ = tpl.Execute(w, &newstats)
 }
 
 func main() {
