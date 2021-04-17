@@ -25,32 +25,32 @@ func TestGetMetrics(t *testing.T) {
 		statsJson string
 		expected  string
 	}{
-		{
+		{ // IDLE 0, BUSY 1, EXPIRED 2, HEALTHY 1, UNHEALTHY 0
 			statsJson: `{"status": {"busyStatus": "IDLE", "health": {"healthStatus": "HEALTHY"}}}`,
 			expected: `# HELP jibri_busystatus It check the status of the jibri whether BUSY, IDLE.
 # TYPE jibri_busystatus gauge
-jibri_busystatus IDLE
+jibri_busystatus 0
 # HELP jibri_healthstatus It check the health status of the jibri whether HEALTHY or not.
 # TYPE jibri_healthstatus gauge
-jibri_healthstatus HEALTHY`,
+jibri_healthstatus 1`,
 		},
-		{
+		{ // IDLE 0, BUSY 1, EXPIRED 2, HEALTHY 1, UNHEALTHY 0
 			statsJson: `{"status": {"busyStatus": "BUSY", "health": {"healthStatus": "HEALTHY"}}}`,
 			expected: `# HELP jibri_busystatus It check the status of the jibri whether BUSY, IDLE.
 # TYPE jibri_busystatus gauge
-jibri_busystatus BUSY
+jibri_busystatus 1
 # HELP jibri_healthstatus It check the health status of the jibri whether HEALTHY or not.
 # TYPE jibri_healthstatus gauge
-jibri_healthstatus HEALTHY`,
+jibri_healthstatus 1`,
 		},
-		{
+		{ // IDLE 0, BUSY 1, EXPIRED 2, HEALTHY 1, UNHEALTHY 0
 			statsJson: `{"status": {"busyStatus": "EXPIRED", "health": {"healthStatus": "UNHEALTHY"}}}`,
 			expected: `# HELP jibri_busystatus It check the status of the jibri whether BUSY, IDLE.
 # TYPE jibri_busystatus gauge
-jibri_busystatus EXPIRED
+jibri_busystatus 2
 # HELP jibri_healthstatus It check the health status of the jibri whether HEALTHY or not.
 # TYPE jibri_healthstatus gauge
-jibri_healthstatus UNHEALTHY`,
+jibri_healthstatus 0`,
 		},
 	}
 
