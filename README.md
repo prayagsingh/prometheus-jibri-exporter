@@ -24,14 +24,30 @@ docker run -p 9889:9889 prayagsingh/prometheus-jibri-exporter:latest -jibri-stat
 
 ## Metrics
 
+**Please select the tag as per your requirement. The output of v1.2.0 and v1.3.0 is different**
+
+**v1.2.0**
+
 ```
 # HELP jibri_busystatus It check the status of the jibri whether BUSY, IDLE.
 # TYPE jibri_busystatus gauge
 jibri_busystatus IDLE
 # HELP jibri_healthstatus It check the health status of the jibri whether HEALTHY or not.
 # TYPE jibri_healthstatus gauge
-jibri_healthstatus HEALTHY`
+jibri_healthstatus HEALTHY
 ```
+
+**v1.3.0** Here IDLE is 0, HEALTHY is 1, BUSY is 1 and UNHEALTHY is 0
+
+```
+# HELP jibri_busystatus It check the status of the jibri whether BUSY, IDLE.
+# TYPE jibri_busystatus gauge
+jibri_busystatus 0
+# HELP jibri_healthstatus It check the health status of the jibri whether HEALTHY or not.
+# TYPE jibri_healthstatus gauge
+jibri_healthstatus 1
+```
+
 
 ## License
 
