@@ -19,7 +19,7 @@ $GOPATH/bin/prometheus-jibri-exporter
 ### Docker
 
 ```
-docker run -p 9889:9889 prayagsingh/prometheus-jibri-exporter:latest -jibri-status-url http://localhost:2222/jibri/api/v1.0/health
+docker run -p 9889:9889 --network <jitsi_network> prayagsingh/prometheus-jibri-exporter:latest -jibri-status-url http://<jibri_container_name OR jibri_container_ip>:2222/jibri/api/v1.0/health
 ```
 
 ## Metrics
