@@ -1,4 +1,4 @@
-FROM golang:1.19.3-alpine as builder
+FROM golang:1.19.5-alpine as builder
 
 WORKDIR /go/src/github.com/systemli/prometheus-jibri-exporter
 
